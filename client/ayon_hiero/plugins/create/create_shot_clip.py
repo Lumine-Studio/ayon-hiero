@@ -12,7 +12,7 @@ class CreateShotClip(phiero.Creator):
     label = "Create Publishable Clip"
     product_type = "clip"
     icon = "film"
-    defaults = ["Main"]
+    defaults = ["main"]
 
     gui_tracks = [track.name()
                   for track in phiero.get_current_sequence().videoTracks()]
@@ -134,8 +134,23 @@ class CreateShotClip(phiero.Creator):
             "order": 3,
             "value": {
                 "productName": {
-                    "value": ["<track_name>", "main", "bg", "fg", "bg",
-                              "animatic"],
+                    "value": [
+                        "<track_name>",
+                        "main",
+                        "mainA",
+                        "mainB",
+                        "ic",
+                        "im",
+                        "imm",
+                        "in",
+                        "aux",
+                        "auxA",
+                        "auxB",
+                        "guide",
+                        "clean",
+                        "ref",
+                        "animatic"
+                        ],
                     "type": "QComboBox",
                     "label": "Product Name",
                     "target": "ui",

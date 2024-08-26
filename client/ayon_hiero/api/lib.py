@@ -648,6 +648,17 @@ def sync_avalon_data_to_workfile():
     log.debug("Synchronizing Pype metadata to project: {}".format(
         project.name()))
 
+    # try to set directory to editing root
+    editing_root = anatomy.roots.get("editing")
+    project_code = anatomy.project_code
+    active_editing_root = (
+        os.path.join(editing_root, project_code)
+    ).replace("\\", "/")
+
+    # only apply if project dir with code exist
+    if os.path.exists(active_editing_root):
+        active_project_root = active_editing_root
+
     # set project root with backward compatibility
     try:
         project.setProjectDirectory(active_project_root)

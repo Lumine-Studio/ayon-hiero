@@ -649,8 +649,8 @@ def sync_avalon_data_to_workfile():
         project.name()))
 
     # try to set directory to editing root
-    editing_root = anatomy.roots.get("editing")
-    project_code = anatomy.project_code
+    editing_root = str(anatomy.roots.get("editing"))
+    project_code = str(anatomy.project_code)
     active_editing_root = (
         os.path.join(editing_root, project_code)
     ).replace("\\", "/")

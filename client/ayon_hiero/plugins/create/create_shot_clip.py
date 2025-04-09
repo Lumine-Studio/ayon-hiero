@@ -288,7 +288,7 @@ class CreateShotClip(plugin.HieroCreator):
     label = "Create Publishable Clip"
     product_type = "editorial"
     icon = "film"
-    defaults = ["Main"]
+    defaults = ["main"]
 
     detailed_description = """
 Publishing clips/plate, audio for new shots to project

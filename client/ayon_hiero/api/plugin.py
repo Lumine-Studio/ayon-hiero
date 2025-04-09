@@ -827,7 +827,7 @@ class PublishClip:
             self.variant = self.base_product_variant
 
         # create product for publishing
-        self.product_name = f"{self.product_type}{self.variant.capitalize()}"
+        self.product_name = f"{self.variant}_{self.product_type}"
 
     def _replace_hash_to_expression(self, name, text):
         """ Replace hash with number in correct padding. """

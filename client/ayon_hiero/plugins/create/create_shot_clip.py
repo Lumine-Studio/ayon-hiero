@@ -323,7 +323,7 @@ class CreateShotClip(plugin.HieroCreator):
     product_type = "editorial"
     product_base_type = "editorial"
     icon = "film"
-    defaults = ["Main"]
+    defaults = ["main"]
 
     detailed_description = """
 Publishing clips/plate, audio for new shots to project
@@ -458,7 +458,7 @@ OTIO file.
                 items=(
                     gui_tracks or [
                         {"value": None, "label": "< nothing to select> "}
-                        ]
+                    ]
                 ),
             ),
             # publishSettings
@@ -651,9 +651,9 @@ OTIO file.
                         {
                             "variant": "main",
                             "productType": "shot",
-                            "productName": "shotMain",
+                            "productName": "shot_main",
                             "label": (
-                                f"{sub_instance_data['folderPath']} shotMain"),
+                                f"{sub_instance_data['folderPath']} shot_main"),
                         }
                     )
                     creator_attributes.update(
@@ -699,7 +699,7 @@ OTIO file.
                 elif creator_id == audio_creator_id:
                     sub_instance_data["variant"] = "main"
                     sub_instance_data["productType"] = "audio"
-                    sub_instance_data["productName"] = "audioMain"
+                    sub_instance_data["productName"] = "audio_main"
 
                     parenting_data = shot_instances[shot_creator_id]
                     sub_instance_data.update(
@@ -736,7 +736,7 @@ OTIO file.
         return instances
 
     def _create_and_add_instance(self, data, creator_id,
-            track_item, instances):
+                                 track_item, instances):
         """
         Args:
             data (dict): The data to re-recreate the instance from.
@@ -864,7 +864,7 @@ OTIO file.
                 "handleEnd": sub_instance_data["handleEnd"],
                 "frameStart": workfileFrameStart,
                 "frameEnd": (workfileFrameStart +
-                    track_item_duration),
+                             track_item_duration),
                 "clipIn": track_item.timelineIn(),
                 "clipOut": track_item.timelineOut(),
                 "clipDuration": track_item_duration,
@@ -935,7 +935,8 @@ OTIO file.
 
         create_settings = self.project_settings["hiero"]["create"]
         collect_settings = create_settings.get("CollectShotClip", {})
-        restrict_to_selection = collect_settings.get("collectSelectedInstance", False)
+        restrict_to_selection = collect_settings.get(
+            "collectSelectedInstance", False)
         current_selection = [
             item for item in lib.get_timeline_selection()
             if isinstance(item, hiero.core.TrackItem)  # get only clips
@@ -956,7 +957,7 @@ OTIO file.
                 # can be handled via creator settings.
                 # When nothing is selected, collect everything.
                 if (restrict_to_selection and current_selection
-                    and track_item not in current_selection):
+                        and track_item not in current_selection):
                     continue
 
                 # attempt to get AYON tag data
@@ -974,7 +975,8 @@ OTIO file.
             # Ensure that parent shot instance are enabled.
             # This can happen when vertical_align is enabled
             # but hero track is not part of the collected clips.
-            all_shot_ids = [inst.id for inst in instances if inst.data["productType"] == "shot"]
+            all_shot_ids = [
+                inst.id for inst in instances if inst.data["productType"] == "shot"]
 
             for inst in instances:
                 if inst.id in all_shot_ids:

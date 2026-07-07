@@ -325,7 +325,7 @@ class CreateShotClip(plugin.HieroCreator):
     product_base_type = "editorial"
     product_type = product_base_type
     icon = "film"
-    defaults = ["Main"]
+    defaults = ["main"]
 
     detailed_description = """
 Publishing clips/plate, audio for new shots to project
@@ -664,9 +664,9 @@ OTIO file.
                             "variant": "main",
                             "productType": "shot",
                             "productBaseType": "shot",
-                            "productName": "shotMain",
+                            "productName": "shot_main",
                             "label": (
-                                f"{sub_instance_data['folderPath']} shotMain"),
+                                f"{sub_instance_data['folderPath']} shot_main"),
                         }
                     )
                     creator_attributes.update(
@@ -716,7 +716,7 @@ OTIO file.
                     sub_instance_data["variant"] = "main"
                     sub_instance_data["productBaseType"] = "audio"
                     sub_instance_data["productType"] = "audio"
-                    sub_instance_data["productName"] = "audioMain"
+                    sub_instance_data["productName"] = "audio_main"
 
                     parenting_data = shot_instances[shot_creator_id]
                     sub_instance_data.update(
@@ -753,7 +753,7 @@ OTIO file.
         return instances
 
     def _create_and_add_instance(self, data, creator_id,
-            track_item, instances):
+                                 track_item, instances):
         """
         Args:
             data (dict): The data to re-recreate the instance from.
@@ -886,7 +886,7 @@ OTIO file.
                 "handleEnd": sub_instance_data["handleEnd"],
                 "frameStart": workfileFrameStart,
                 "frameEnd": (workfileFrameStart +
-                    track_item_duration),
+                             track_item_duration),
                 "clipIn": track_item.timelineIn(),
                 "clipOut": track_item.timelineOut(),
                 "clipDuration": track_item_duration,
@@ -985,7 +985,7 @@ OTIO file.
                 # can be handled via creator settings.
                 # When nothing is selected, collect everything.
                 if (restrict_to_selection and current_selection
-                    and track_item not in current_selection):
+                        and track_item not in current_selection):
                     continue
 
                 # attempt to get AYON tag data
